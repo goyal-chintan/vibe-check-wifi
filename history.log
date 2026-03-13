@@ -1,0 +1,381 @@
+[2026-03-12 19:27:28] profile=video verdict=WARN
+Overall verdict: WARN
+Profile verdict: WARN (video)
+Profile type: Video call
+
+Top problems detected
+- [WARN] dns_p95_ms: observed 145.83 (target <= 120.0)
+
+Detailed metrics
+- Latency p50 (ms): 20.93
+- Latency p95 (ms): 45.81
+- Jitter (ms): 11.30
+- Packet loss (%): 0.00
+- Latency spikes: 2
+- Dropouts: 0
+- SNR (dB): n/a
+- RSSI (dBm): n/a
+- Noise (dBm): n/a
+- Tx rate (Mbps): n/a
+- DNS p95 (ms): 145.83
+- DNS failures: 0
+- Route timeout hops: 1
+- Latency under load delta (ms): -16.29
+
+What to do next
+- Try reliable DNS resolvers (for example 1.1.1.1 or 8.8.8.8).
+
+Optional speed test
+- Could not complete speed test: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)>
+------------------------------------------------------------------------
+[2026-03-12 19:36:33] profile=video verdict=PASS
+Overall verdict: PASS
+Profile verdict: PASS (video)
+Profile type: Video call
+
+Top problems detected
+- No major issues detected for this profile.
+
+Detailed metrics
+- Latency p50 (ms): 22.20
+- Latency p95 (ms): 76.61
+- Jitter (ms): 19.23
+- Packet loss (%): 0.00
+- Latency spikes: 3
+- Dropouts: 0
+- SNR (dB): 20
+- RSSI (dBm): -75
+- Noise (dBm): -95
+- Tx rate (Mbps): 130
+- DNS p95 (ms): 100.79
+- DNS failures: 0
+- Route timeout hops: 1
+- Latency under load delta (ms): -6.98
+
+What to do next
+- Connection looks stable for this profile right now.
+- Keep live monitor running during calls to catch intermittent spikes.
+------------------------------------------------------------------------
+[2026-03-12 19:44:13] profile=video verdict=WARN
+Overall verdict: WARN
+Profile verdict: WARN (video)
+Profile type: Video call
+
+Top problems detected
+- [WARN] snr_db: observed 17.0 (target <= 20.0)
+
+Detailed metrics
+- Latency p50 (ms): 19.37
+- Latency p95 (ms): 39.97
+- Jitter (ms): 12.29
+- Packet loss (%): 0.00
+- Latency spikes: 1
+- Dropouts: 0
+- SNR (dB): 17
+- RSSI (dBm): -78
+- Noise (dBm): -95
+- Tx rate (Mbps): 65
+- DNS p95 (ms): 110.81
+- DNS failures: 0
+- Route timeout hops: 1
+- Latency under load delta (ms): -13.00
+
+What to do next
+- Improve signal quality by reducing distance/walls or changing router position.
+------------------------------------------------------------------------
+[2026-03-12 19:49:05] profile=video verdict=PASS
+Overall verdict: PASS
+Profile verdict: PASS (video)
+Profile type: Video call
+
+Top problems detected
+- No major issues detected for this profile.
+
+Detailed metrics
+- Latency p50 (ms): 19.48
+- Latency p95 (ms): 61.40
+- Jitter (ms): 16.31
+- Packet loss (%): 0.00
+- Latency spikes: 3
+- Dropouts: 0
+- SNR (dB): 26
+- RSSI (dBm): -69
+- Noise (dBm): -95
+- Tx rate (Mbps): 234
+- DNS p95 (ms): 96.19
+- DNS failures: 0
+- Route timeout hops: 1
+- Latency under load delta (ms): -43.77
+
+What to do next
+- Connection looks stable for this profile right now.
+- Keep live monitor running during calls to catch intermittent spikes.
+------------------------------------------------------------------------
+[2026-03-12 19:52:03] profile=video verdict=PASS
+Overall verdict: PASS
+Profile verdict: PASS (video)
+Profile type: Video call
+
+Top problems detected
+- No major issues detected for this profile.
+
+Detailed metrics
+- Latency p50 (ms): 19.40
+- Latency p95 (ms): 63.49
+- Jitter (ms): 14.19
+- Packet loss (%): 0.00
+- Latency spikes: 4
+- Dropouts: 0
+- SNR (dB): 28
+- RSSI (dBm): -67
+- Noise (dBm): -95
+- Tx rate (Mbps): 390
+- DNS p95 (ms): 97.24
+- DNS failures: 0
+- Route timeout hops: 1
+- Latency under load delta (ms): -44.60
+
+What to do next
+- Connection looks stable for this profile right now.
+- Keep live monitor running during calls to catch intermittent spikes.
+
+Optional speed test
+- Could not complete speed test: HTTP Error 403: Forbidden
+------------------------------------------------------------------------
+[2026-03-12 19:58:33] profile=video verdict=PASS
+Wi-Fi Readiness
+Overall verdict: PASS
+Profile verdict: PASS (video)
+Profile type: Video call
+
+Connection speed
+- Download (Mbps): 43.91
+- Upload (Mbps): 40.43
+
+Wi-Fi performance
+- Rating: Fair
+- Good for normal meetings, but heavier workloads may be sensitive to distance or interference.
+
+Use-case readiness
+- Audio call: PASS
+- Video call: PASS
+- Video + Screen-share call: FAIL
+
+Top problems detected
+- No major issues detected for this profile.
+
+Detailed metrics
+- Latency p50 (ms): 18.72
+- Latency p95 (ms): 69.25
+- Jitter (ms): 19.57
+- Packet loss (%): 0.00
+- Latency spikes: 3
+- Dropouts: 0
+- SNR (dB): 24
+- RSSI (dBm): -71
+- Noise (dBm): -95
+- Tx rate (Mbps): 195
+- DNS p95 (ms): 90.30
+- DNS failures: 0
+- Route timeout hops: 1
+- Latency under load delta (ms): -51.39
+
+What to do next
+- Connection looks stable for this profile right now.
+- Keep live monitor running during calls to catch intermittent spikes.
+------------------------------------------------------------------------
+[2026-03-12 20:00:46] profile=video verdict=PASS
+Wi-Fi Readiness
+Overall verdict: PASS
+Profile verdict: PASS (video)
+Profile type: Video call
+
+Connection speed
+- Download (Mbps): 47.30
+- Upload (Mbps): 21.33
+
+Wi-Fi performance
+- Rating: Fair
+- Good for normal meetings, but heavier workloads may be sensitive to distance or interference.
+
+Use-case readiness
+- Audio call: PASS
+- Video call: PASS
+- Video + Screen-share call: WARN
+
+Top problems detected
+- No major issues detected for this profile.
+
+Detailed metrics
+- Latency p50 (ms): 20.38
+- Latency p95 (ms): 65.72
+- Jitter (ms): 17.14
+- Packet loss (%): 0.00
+- Latency spikes: 3
+- Dropouts: 0
+- SNR (dB): 23
+- RSSI (dBm): -72
+- Noise (dBm): -95
+- Tx rate (Mbps): 175
+- DNS p95 (ms): 103.18
+- DNS failures: 0
+- Route timeout hops: 1
+- Latency under load delta (ms): -18.34
+
+What to do next
+- Connection looks stable for this profile right now.
+- Keep live monitor running during calls to catch intermittent spikes.
+------------------------------------------------------------------------
+[2026-03-12 20:12:08] profile=video verdict=FAIL
+Wi-Fi Readiness
+Overall verdict: FAIL
+Profile verdict: FAIL (video)
+Profile type: Video call
+
+Connection speed
+- Not measured in this run.
+
+Wi-Fi performance
+- Rating: Poor
+- Likely to struggle with real-time meetings until signal quality or stability improves.
+
+Use-case readiness
+- Audio call: WARN
+- Video call: FAIL
+- Video + Screen-share call: FAIL
+
+Top problems detected
+- [WARN] jitter_ms: observed 31.24 (target <= 30.0)
+- [FAIL] dns_p95_ms: observed 253.35 (target <= 120.0)
+
+Detailed metrics
+- Latency p50 (ms): 18.82
+- Latency p95 (ms): 94.48
+- Jitter (ms): 31.24
+- Packet loss (%): 0.00
+- Secondary path packet loss (%): 0.00
+- Secondary path latency p95 (ms): 36.17
+- Gateway packet loss (%): 0.00
+- Gateway latency p95 (ms): 49.63
+- Latency spikes: 2
+- Dropouts: 0
+- SNR (dB): 44
+- RSSI (dBm): -51
+- Noise (dBm): -95
+- Tx rate (Mbps): 650
+- DNS p95 (ms): 253.35
+- DNS failures: 0
+- Route timeout hops: 1.00
+- Latency under load delta (ms): 9.78
+- Download throughput (Mbps): 8.32
+- Upload throughput (Mbps): 10.20
+
+What to do next
+- Reduce interference: switch to 5 GHz and avoid crowded channels.
+- Try reliable DNS resolvers (for example 1.1.1.1 or 8.8.8.8).
+------------------------------------------------------------------------
+[2026-03-12 20:33:50] profile=video verdict=WARN
+Wi-Fi Readiness
+Overall verdict: WARN
+Profile verdict: WARN (video)
+Profile type: Video call
+
+Connection speed
+- Download (Mbps): 62.64
+- Upload (Mbps): 10.85
+
+Wi-Fi performance
+- Rating: Fair
+- Good for normal meetings, but heavier workloads may be sensitive to distance or interference.
+
+Use-case readiness
+- Audio call: PASS
+- Video call: WARN
+- Video + Screen-share call: FAIL
+
+Top problems detected
+- [WARN] jitter_ms: observed 37.37 (target <= 30.0)
+- [WARN] dns_p95_ms: observed 120.2 (target <= 120.0)
+- [WARN] gateway_latency_p95_ms: observed 65.87 (target <= 60.0)
+
+Detailed metrics
+- Latency p50 (ms): 19.79
+- Latency p95 (ms): 101.97
+- Jitter (ms): 37.37
+- Packet loss (%): 0.00
+- Secondary path packet loss (%): 1.11
+- Secondary path latency p95 (ms): 102.95
+- Gateway packet loss (%): 0.00
+- Gateway latency p95 (ms): 65.87
+- Latency spikes: 42
+- Dropouts: 0
+- SNR (dB): 28
+- RSSI (dBm): -67
+- Noise (dBm): -95
+- Tx rate (Mbps): 57
+- DNS p95 (ms): 120.20
+- DNS failures: 0
+- Route timeout hops: 1.00
+- Latency under load delta (ms): 46.60
+- Download throughput (Mbps): 62.64
+- Upload throughput (Mbps): 10.85
+
+What to do next
+- Reduce interference: switch to 5 GHz and avoid crowded channels.
+- Try reliable DNS resolvers (for example 1.1.1.1 or 8.8.8.8).
+- Router response is slow; check local interference and router load.
+------------------------------------------------------------------------
+[2026-03-12 20:55:08] profile=video verdict=FAIL
+Wi-Fi Readiness
+Overall verdict: FAIL
+Profile verdict: FAIL (video)
+Profile type: Video call
+
+Connection speed
+- Not measured in this run.
+
+Wi-Fi performance
+- Rating: Poor
+- Likely to struggle with real-time meetings until signal quality or stability improves.
+
+Use-case readiness
+- Audio call: FAIL
+- Video call: FAIL
+- Video + Screen-share call: FAIL
+
+Top problems detected
+- [WARN] latency_p95_ms: observed 185.48 (target <= 150.0)
+- [FAIL] jitter_ms: observed 91.03 (target <= 30.0)
+- [FAIL] packet_loss_pct: observed 2.22 (target <= 1.0)
+- [FAIL] dns_p95_ms: observed 512.71 (target <= 120.0)
+- [FAIL] gateway_latency_p95_ms: observed 133.9 (target <= 60.0)
+
+Detailed metrics
+- Latency p50 (ms): 28.99
+- Latency p95 (ms): 185.48
+- Jitter (ms): 91.03
+- Packet loss (%): 2.22
+- Secondary path packet loss (%): 1.11
+- Secondary path latency p95 (ms): 159.57
+- Gateway packet loss (%): 0.56
+- Gateway latency p95 (ms): 133.90
+- Latency spikes: 63
+- Dropouts: 4
+- SNR (dB): 55
+- RSSI (dBm): -39
+- Noise (dBm): -94
+- Tx rate (Mbps): 866
+- DNS p95 (ms): 512.71
+- DNS failures: 0
+- Route timeout hops: 1.00
+- Latency under load delta (ms): 66.60
+- Download throughput (Mbps): 8.98
+- Upload throughput (Mbps): 7.42
+
+What to do next
+- If possible, use Ethernet or move closer to the router.
+- Reduce interference: switch to 5 GHz and avoid crowded channels.
+- Restart router/modem and check for packet loss on other devices.
+- Try reliable DNS resolvers (for example 1.1.1.1 or 8.8.8.8).
+- Router response is slow; check local interference and router load.
+------------------------------------------------------------------------
