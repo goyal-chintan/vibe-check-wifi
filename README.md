@@ -10,7 +10,7 @@ It focuses on meeting quality signals: latency, jitter, packet loss, DNS respons
 ## Run
 
 ```bash
-cd /Users/chintan/Personal/repos/wifi-call-health
+cd wifi-call-health
 python3 -m pip install --user rich
 python3 vibe_check_wifi.py
 ```
@@ -39,12 +39,12 @@ Text-only report with:
 Run history is appended to:
 
 ```text
-/Users/chintan/Personal/repos/wifi-call-health/history.log
+./history.log
 ```
 
 ## Tests
 
 ```bash
-cd /Users/chintan/Personal/repos/wifi-call-health
+cd wifi-call-health
 python3 -m pytest -q
 ```
