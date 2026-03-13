@@ -45,7 +45,7 @@ def test_report_contains_human_readable_sections():
     text = format_report(report)
 
     assert "Overall verdict: WARN" in text
-    assert "Wi-Fi Readiness" in text
+    assert "Vibe Check WiFi" in text
     assert "Profile verdict: WARN (video)" in text
     assert "Connection speed" in text
     assert "Wi-Fi performance" in text

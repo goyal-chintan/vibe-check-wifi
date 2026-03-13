@@ -70,7 +70,7 @@ def format_report(report: dict[str, Any]) -> str:
     wifi_performance = report.get("wifi_performance", {})
 
     lines: list[str] = []
-    lines.append("Wi-Fi Readiness")
+    lines.append("Vibe Check WiFi")
     lines.append(f"Overall verdict: {overall_verdict}")
     lines.append(f"Profile verdict: {profile_result.get('verdict', 'WARN')} ({profile})")
     lines.append(f"Profile type: {profile_name}")

@@ -16,7 +16,7 @@ AIRPORT_PATH = "/System/Library/PrivateFrameworks/Apple80211.framework/Versions/
 DEFAULT_PRIMARY_TARGET = "1.1.1.1"
 DEFAULT_SECONDARY_TARGET = "8.8.8.8"
 DNS_HOSTS = ["zoom.us", "meet.google.com", "teams.microsoft.com", "webex.com"]
-SPEED_TEST_USER_AGENT = "Wi-Fi Readiness/1.0"
+SPEED_TEST_USER_AGENT = "Vibe Check WiFi/1.0"
 
 
 def run_command(cmd: list[str], timeout: float = 10.0) -> str:

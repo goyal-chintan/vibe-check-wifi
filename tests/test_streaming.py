@@ -1,6 +1,6 @@
 from collections import deque
 
-from wifi_call_health import _make_tui_event_handler, execute_assessment_streamed
+from vibe_check_wifi import _make_tui_event_handler, execute_assessment_streamed
 
 
 def test_execute_assessment_streamed_emits_progress_and_builds_metrics():

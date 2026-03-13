@@ -112,5 +112,5 @@ def test_optional_speed_test_sends_user_agent_headers(monkeypatch):
 
     assert result["download_mbps"] is not None
     assert result["upload_mbps"] is not None
-    assert requests[0].headers["User-agent"] == "Wi-Fi Readiness/1.0"
-    assert requests[1].headers["User-agent"] == "Wi-Fi Readiness/1.0"
+    assert requests[0].headers["User-agent"] == "Vibe Check WiFi/1.0"
+    assert requests[1].headers["User-agent"] == "Vibe Check WiFi/1.0"

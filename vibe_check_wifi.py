@@ -155,7 +155,7 @@ def _render_tui_panel(profile: str, state: dict[str, Any], logs: deque[str]) -> 
 
     log_text = "\n".join(logs) if logs else "Waiting for probes to start..."
     body.add_row(Panel(Text(log_text), title="Activity", border_style="magenta"))
-    return Panel(body, title="Wi-Fi Readiness", border_style="green")
+    return Panel(body, title="Vibe Check WiFi", border_style="green")
 
 
 def _make_tui_event_handler(
@@ -609,7 +609,7 @@ def run_menu_tui() -> None:
         table.add_row("")
         table.add_row(f"Current profile: {selected_profile}")
 
-        console.print(Panel(table, title="Wi-Fi Readiness", border_style="blue"))
+        console.print(Panel(table, title="Vibe Check WiFi", border_style="blue"))
         choice = Prompt.ask("Select option", choices=["1", "2", "3", "4", "5", "6", "7"], default="1")
 
         if choice == "7":
@@ -683,7 +683,7 @@ def run_menu(input_fn=input, output_fn=print, handlers: dict[str, Callable[[], N
 
     while True:
         output_fn("")
-        output_fn("Wi-Fi Readiness")
+        output_fn("Vibe Check WiFi")
         output_fn(f"Current profile: {selected_profile}")
         output_fn("1) Quick Check (1-2 min)")
         output_fn("2) Meeting Check (10-15 min)")

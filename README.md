@@ -1,4 +1,4 @@
-# Wi-Fi Readiness
+# Vibe Check WiFi
 
 Interactive macOS CLI to assess whether your network is stable for:
 - Audio calls
@@ -12,7 +12,7 @@ It focuses on meeting quality signals: latency, jitter, packet loss, DNS respons
 ```bash
 cd /Users/chintan/Personal/repos/wifi-call-health
 python3 -m pip install --user rich
-python3 wifi_call_health.py
+python3 vibe_check_wifi.py
 ```
 
 The app runs as a full terminal UI with live progress panels, phase-by-phase activity, and a final results screen.

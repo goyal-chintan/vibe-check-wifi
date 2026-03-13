@@ -1,4 +1,4 @@
-from wifi_call_health import run_menu
+from vibe_check_wifi import run_menu
 
 
 def test_run_menu_exit_directly():

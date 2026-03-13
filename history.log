@@ -143,7 +143,7 @@ Optional speed test
 - Could not complete speed test: HTTP Error 403: Forbidden
 ------------------------------------------------------------------------
 [2026-03-12 19:58:33] profile=video verdict=PASS
-Wi-Fi Readiness
+Vibe Check WiFi
 Overall verdict: PASS
 Profile verdict: PASS (video)
 Profile type: Video call
@@ -185,7 +185,7 @@ What to do next
 - Keep live monitor running during calls to catch intermittent spikes.
 ------------------------------------------------------------------------
 [2026-03-12 20:00:46] profile=video verdict=PASS
-Wi-Fi Readiness
+Vibe Check WiFi
 Overall verdict: PASS
 Profile verdict: PASS (video)
 Profile type: Video call
@@ -227,7 +227,7 @@ What to do next
 - Keep live monitor running during calls to catch intermittent spikes.
 ------------------------------------------------------------------------
 [2026-03-12 20:12:08] profile=video verdict=FAIL
-Wi-Fi Readiness
+Vibe Check WiFi
 Overall verdict: FAIL
 Profile verdict: FAIL (video)
 Profile type: Video call
@@ -275,7 +275,7 @@ What to do next
 - Try reliable DNS resolvers (for example 1.1.1.1 or 8.8.8.8).
 ------------------------------------------------------------------------
 [2026-03-12 20:33:50] profile=video verdict=WARN
-Wi-Fi Readiness
+Vibe Check WiFi
 Overall verdict: WARN
 Profile verdict: WARN (video)
 Profile type: Video call
@@ -326,7 +326,7 @@ What to do next
 - Router response is slow; check local interference and router load.
 ------------------------------------------------------------------------
 [2026-03-12 20:55:08] profile=video verdict=FAIL
-Wi-Fi Readiness
+Vibe Check WiFi
 Overall verdict: FAIL
 Profile verdict: FAIL (video)
 Profile type: Video call
