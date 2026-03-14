@@ -1,4 +1,5 @@
 import math
+from urllib.parse import parse_qs, urlparse
 
 import probes
 from probes import (
@@ -83,7 +84,7 @@ def test_parse_system_profiler_output_extracts_wifi_metrics():
 
 def test_optional_speed_test_sends_user_agent_headers(monkeypatch):
     requests = []
-    clock_values = iter([0.0, 1.0, 2.0, 3.0])
+    clock_values = iter([0.0, 1.0, 1.0, 2.0, 2.0, 3.0, 3.0, 4.0])
 
     class FakeResponse:
         def __init__(self, payload):
@@ -100,7 +101,13 @@ def test_optional_speed_test_sends_user_agent_headers(monkeypatch):
 
     def fake_urlopen(request, timeout=None, context=None):
         requests.append(request)
-        payload = b"x" * 1024 if getattr(request, "method", "GET") != "POST" else b""
+        method = getattr(request, "method", "GET")
+        if method == "POST":
+            payload = b""
+        else:
+            query = parse_qs(urlparse(request.full_url).query)
+            size = int(query.get("bytes", ["1024"])[0])
+            payload = b"x" * size
         return FakeResponse(payload)
 
     monkeypatch.setattr(probes, "_build_ssl_context", lambda: object())
@@ -112,5 +119,6 @@ def test_optional_speed_test_sends_user_agent_headers(monkeypatch):
 
     assert result["download_mbps"] is not None
     assert result["upload_mbps"] is not None
+    assert len([request for request in requests if getattr(request, "method", "GET") == "GET"]) >= 3
     assert requests[0].headers["User-agent"] == "Vibe Check WiFi/1.0"
-    assert requests[1].headers["User-agent"] == "Vibe Check WiFi/1.0"
+    assert requests[-1].headers["User-agent"] == "Vibe Check WiFi/1.0"

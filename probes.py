@@ -350,20 +350,28 @@ def optional_speed_test(download_bytes: int = 2_000_000, upload_bytes: int = 1_0
     results: dict[str, Any] = {
         "download_mbps": None,
         "upload_mbps": None,
+        "download_samples_mbps": [],
         "error": None,
     }
     try:
         context = _build_ssl_context()
-        down_url = f"https://speed.cloudflare.com/__down?bytes={download_bytes}"
-        down_request = urllib.request.Request(
-            down_url,
-            headers={"User-Agent": SPEED_TEST_USER_AGENT},
-        )
-        start = time.perf_counter()
-        with urllib.request.urlopen(down_request, timeout=20.0, context=context) as response:
-            payload = response.read()
-        elapsed = max(time.perf_counter() - start, 0.001)
-        results["download_mbps"] = round((len(payload) * 8.0) / (elapsed * 1_000_000.0), 2)
+        staged_sizes = _download_probe_sizes(download_bytes)
+        download_samples: list[float] = []
+        for size in staged_sizes:
+            sample = _timed_download(
+                f"https://speed.cloudflare.com/__down?bytes={size}",
+                read_bytes=size,
+                context=context,
+            )
+            if sample is not None:
+                download_samples.append(sample)
+        results["download_samples_mbps"] = download_samples
+        if download_samples:
+            if len(download_samples) == 1:
+                results["download_mbps"] = download_samples[0]
+            else:
+                top_two = sorted(download_samples)[-2:]
+                results["download_mbps"] = round(statistics.mean(top_two), 2)
 
         up_payload = os.urandom(upload_bytes)
         request = urllib.request.Request(
@@ -383,6 +391,21 @@ def optional_speed_test(download_bytes: int = 2_000_000, upload_bytes: int = 1_0
     except Exception as exc:
         results["error"] = str(exc)
     return results
+
+
+def _download_probe_sizes(base_bytes: int) -> list[int]:
+    base = max(1_000_000, int(base_bytes))
+    candidates = [
+        base,
+        max(base * 3, 6_000_000),
+        max(base * 8, 20_000_000),
+    ]
+    sizes: list[int] = []
+    for value in candidates:
+        bounded = min(value, 40_000_000)
+        if bounded not in sizes:
+            sizes.append(bounded)
+    return sizes
 
 
 def gather_assessment(duration_minutes: int = 2, include_speed_test: bool = False) -> dict[str, Any]:

@@ -379,3 +379,349 @@ What to do next
 - Try reliable DNS resolvers (for example 1.1.1.1 or 8.8.8.8).
 - Router response is slow; check local interference and router load.
 ------------------------------------------------------------------------
+[2026-03-13 23:57:52] profile=video verdict=FAIL
+Vibe Check WiFi
+Overall verdict: FAIL
+Profile verdict: FAIL (video)
+Profile type: Video call
+
+Connection speed
+- Download (Mbps): 32.37
+- Upload (Mbps): 30.99
+
+Wi-Fi performance
+- Rating: Poor
+- Likely to struggle with real-time meetings until signal quality or stability improves.
+
+Use-case readiness
+- Audio call: FAIL
+- Video call: FAIL
+- Video + Screen-share call: FAIL
+
+Top problems detected
+- [WARN] latency_p95_ms: observed 189.31 (target <= 150.0)
+- [WARN] jitter_ms: observed 43.51 (target <= 30.0)
+- [WARN] congestion_delta_ms: observed 83.85 (target <= 80.0)
+- [FAIL] dns_p95_ms: observed 271.04 (target <= 120.0)
+
+Detailed metrics
+- Latency p50 (ms): 18.45
+- Latency p95 (ms): 189.31
+- Jitter (ms): 43.51
+- Packet loss (%): 0.00
+- Secondary path packet loss (%): 0.00
+- Secondary path latency p95 (ms): 128.62
+- Gateway packet loss (%): 0.00
+- Gateway latency p95 (ms): 11.05
+- Latency spikes: 6
+- Dropouts: 0
+- SNR (dB): 55
+- RSSI (dBm): -39
+- Noise (dBm): -94
+- Tx rate (Mbps): 866
+- DNS p95 (ms): 271.04
+- DNS failures: 0
+- Route timeout hops: 1.00
+- Latency under load delta (ms): 83.85
+- Download throughput (Mbps): 32.37
+- Upload throughput (Mbps): 30.99
+
+What to do next
+- If possible, use Ethernet or move closer to the router.
+- Reduce interference: switch to 5 GHz and avoid crowded channels.
+- Limit background uploads/downloads during meetings.
+- Try reliable DNS resolvers (for example 1.1.1.1 or 8.8.8.8).
+------------------------------------------------------------------------
+[2026-03-14 00:14:07] profile=video verdict=WARN
+Vibe Check WiFi
+Overall verdict: WARN
+Profile verdict: WARN (video)
+Profile type: Video call
+
+Connection speed
+- Download (Mbps): 73.03
+- Upload (Mbps): 26.09
+
+Wi-Fi performance
+- Rating: Fair
+- Good for normal meetings, but heavier workloads may be sensitive to distance or interference.
+
+Use-case readiness
+- Audio call: PASS
+- Video call: WARN
+- Video + Screen-share call: FAIL
+
+Top problems detected
+- [WARN] jitter_ms: observed 39.55 (target <= 30.0)
+- [WARN] dns_p95_ms: observed 124.63 (target <= 120.0)
+
+Detailed metrics
+- Latency p50 (ms): 18.13
+- Latency p95 (ms): 112.89
+- Jitter (ms): 39.55
+- Packet loss (%): 0.00
+- Secondary path packet loss (%): 0.00
+- Secondary path latency p95 (ms): 27.27
+- Gateway packet loss (%): 0.00
+- Gateway latency p95 (ms): 47.44
+- Latency spikes: 1
+- Dropouts: 0
+- SNR (dB): 57
+- RSSI (dBm): -38
+- Noise (dBm): -95
+- Tx rate (Mbps): 866
+- DNS p95 (ms): 124.63
+- DNS failures: 0
+- Route timeout hops: 1.00
+- Latency under load delta (ms): 48.44
+- Download throughput (Mbps): 73.03
+- Upload throughput (Mbps): 26.09
+
+What to do next
+- Reduce interference: switch to 5 GHz and avoid crowded channels.
+- Try reliable DNS resolvers (for example 1.1.1.1 or 8.8.8.8).
+------------------------------------------------------------------------
+[2026-03-14 00:36:43] profile=video verdict=FAIL
+Vibe Check WiFi
+Overall verdict: FAIL
+Profile verdict: FAIL (video)
+Profile type: Video call
+
+Connection speed
+- Download (Mbps): 86.89
+- Upload (Mbps): 32.43
+
+Wi-Fi performance
+- Rating: Poor
+- Likely to struggle with real-time meetings until signal quality or stability improves.
+
+Use-case readiness
+- Audio call: FAIL
+- Video call: FAIL
+- Video + Screen-share call: FAIL
+
+Top problems detected
+- [WARN] jitter_ms: observed 38.85 (target <= 30.0)
+- [WARN] dns_p95_ms: observed 121.6 (target <= 120.0)
+- [FAIL] secondary_packet_loss_pct: observed 16.67 (target <= 2.0)
+
+Detailed metrics
+- Latency p50 (ms): 18.01
+- Latency p95 (ms): 117.09
+- Jitter (ms): 38.85
+- Packet loss (%): 0.00
+- Secondary path packet loss (%): 16.67
+- Secondary path latency p95 (ms): 33.74
+- Gateway packet loss (%): 0.00
+- Gateway latency p95 (ms): 12.52
+- Latency spikes: 2
+- Dropouts: 0
+- SNR (dB): 54
+- RSSI (dBm): -40
+- Noise (dBm): -94
+- Tx rate (Mbps): 866
+- DNS p95 (ms): 121.60
+- DNS failures: 0
+- Route timeout hops: 1.00
+- Latency under load delta (ms): 62.12
+- Download throughput (Mbps): 86.89
+- Upload throughput (Mbps): 32.43
+
+What to do next
+- Reduce interference: switch to 5 GHz and avoid crowded channels.
+- Try reliable DNS resolvers (for example 1.1.1.1 or 8.8.8.8).
+- Secondary route is unstable; this suggests upstream fluctuations.
+------------------------------------------------------------------------
+[2026-03-14 00:56:44] profile=video verdict=FAIL
+Vibe Check WiFi
+Overall verdict: FAIL
+Profile verdict: FAIL (video)
+Profile type: Video call
+
+Connection speed
+- Download (Mbps): 80.04
+- Upload (Mbps): 23.13
+
+Wi-Fi performance
+- Rating: Poor
+- Likely to struggle with real-time meetings until signal quality or stability improves.
+
+Use-case readiness
+- Audio call: WARN
+- Video call: FAIL
+- Video + Screen-share call: FAIL
+
+Top problems detected
+- [FAIL] jitter_ms: observed 46.5 (target <= 30.0)
+
+Detailed metrics
+- Latency p50 (ms): 19.33
+- Latency p95 (ms): 144.97
+- Jitter (ms): 46.50
+- Packet loss (%): 0.00
+- Secondary path packet loss (%): 0.00
+- Secondary path latency p95 (ms): 22.86
+- Gateway packet loss (%): 0.00
+- Gateway latency p95 (ms): 32.25
+- Latency spikes: 2
+- Dropouts: 0
+- SNR (dB): 55
+- RSSI (dBm): -39
+- Noise (dBm): -94
+- Tx rate (Mbps): 866
+- DNS p95 (ms): 81.72
+- DNS failures: 0
+- Route timeout hops: 1.00
+- Latency under load delta (ms): -23.41
+- Download throughput (Mbps): 80.04
+- Upload throughput (Mbps): 23.13
+
+What to do next
+- Reduce interference: switch to 5 GHz and avoid crowded channels.
+------------------------------------------------------------------------
+[2026-03-14 00:59:18] profile=video verdict=FAIL
+Vibe Check WiFi
+Overall verdict: FAIL
+Profile verdict: FAIL (video)
+Profile type: Video call
+
+Connection speed
+- Download (Mbps): 94.19
+- Upload (Mbps): 41.22
+
+Wi-Fi performance
+- Rating: Poor
+- Likely to struggle with real-time meetings until signal quality or stability improves.
+
+Use-case readiness
+- Audio call: WARN
+- Video call: FAIL
+- Video + Screen-share call: FAIL
+
+Top problems detected
+- [FAIL] dns_p95_ms: observed 239.71 (target <= 120.0)
+- [WARN] gateway_latency_p95_ms: observed 83.0 (target <= 60.0)
+
+Detailed metrics
+- Latency p50 (ms): 18.95
+- Latency p95 (ms): 66.37
+- Jitter (ms): 11.40
+- Packet loss (%): 0.00
+- Secondary path packet loss (%): 0.00
+- Secondary path latency p95 (ms): 23.04
+- Gateway packet loss (%): 0.00
+- Gateway latency p95 (ms): 83.00
+- Latency spikes: 1
+- Dropouts: 0
+- SNR (dB): 55
+- RSSI (dBm): -39
+- Noise (dBm): -94
+- Tx rate (Mbps): 780
+- DNS p95 (ms): 239.71
+- DNS failures: 0
+- Route timeout hops: 1.00
+- Latency under load delta (ms): 10.80
+- Download throughput (Mbps): 94.19
+- Upload throughput (Mbps): 41.22
+
+What to do next
+- Try reliable DNS resolvers (for example 1.1.1.1 or 8.8.8.8).
+- Router response is slow; check local interference and router load.
+------------------------------------------------------------------------
+[2026-03-14 01:04:02] profile=video verdict=WARN
+Vibe Check WiFi
+Overall verdict: WARN
+Profile verdict: WARN (video)
+Profile type: Video call
+
+Connection speed
+- Not measured in this run.
+
+Wi-Fi performance
+- Rating: Fair
+- Good for normal meetings, but heavier workloads may be sensitive to distance or interference.
+
+Use-case readiness
+- Audio call: PASS
+- Video call: WARN
+- Video + Screen-share call: FAIL
+
+Top problems detected
+- [WARN] congestion_delta_ms: observed 95.44 (target <= 80.0)
+- [WARN] dns_p95_ms: observed 124.09 (target <= 120.0)
+
+Detailed metrics
+- Latency p50 (ms): 18.36
+- Latency p95 (ms): 25.52
+- Jitter (ms): 3.54
+- Packet loss (%): 0.00
+- Secondary path packet loss (%): 0.00
+- Secondary path latency p95 (ms): 91.72
+- Gateway packet loss (%): 0.00
+- Gateway latency p95 (ms): 9.09
+- Latency spikes: 0
+- Dropouts: 0
+- SNR (dB): 56
+- RSSI (dBm): -39
+- Noise (dBm): -95
+- Tx rate (Mbps): 585
+- DNS p95 (ms): 124.09
+- DNS failures: 0
+- Route timeout hops: 1.00
+- Latency under load delta (ms): 95.44
+- Download throughput (Mbps): 13.12
+- Upload throughput (Mbps): 8.72
+
+What to do next
+- Limit background uploads/downloads during meetings.
+- Try reliable DNS resolvers (for example 1.1.1.1 or 8.8.8.8).
+------------------------------------------------------------------------
+[2026-03-14 23:17:15] profile=video verdict=FAIL
+Vibe Check WiFi
+Overall verdict: FAIL
+Profile verdict: FAIL (video)
+Profile type: Video call
+
+Connection speed
+- Download (Mbps): 68.12
+- Upload (Mbps): 12.61
+
+Wi-Fi performance
+- Rating: Poor
+- Likely to struggle with real-time meetings until signal quality or stability improves.
+
+Use-case readiness
+- Audio call: WARN
+- Video call: FAIL
+- Video + Screen-share call: FAIL
+
+Top problems detected
+- [WARN] jitter_ms: observed 30.86 (target <= 30.0)
+- [FAIL] dns_p95_ms: observed 197.94 (target <= 120.0)
+
+Detailed metrics
+- Latency p50 (ms): 19.33
+- Latency p95 (ms): 107.16
+- Jitter (ms): 30.86
+- Packet loss (%): 0.00
+- Secondary path packet loss (%): 0.00
+- Secondary path latency p95 (ms): 97.01
+- Gateway packet loss (%): 0.00
+- Gateway latency p95 (ms): 17.03
+- Latency spikes: 10
+- Dropouts: 0
+- SNR (dB): 52
+- RSSI (dBm): -42
+- Noise (dBm): -94
+- Tx rate (Mbps): 866
+- DNS p95 (ms): 197.94
+- DNS failures: 0
+- Route timeout hops: 1.00
+- Latency under load delta (ms): 62.05
+- Download throughput (Mbps): 68.12
+- Upload throughput (Mbps): 12.61
+
+What to do next
+- Reduce interference: switch to 5 GHz and avoid crowded channels.
+- Try reliable DNS resolvers (for example 1.1.1.1 or 8.8.8.8).
+------------------------------------------------------------------------

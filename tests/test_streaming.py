@@ -6,8 +6,8 @@ from vibe_check_wifi import _make_tui_event_handler, execute_assessment_streamed
 def test_execute_assessment_streamed_emits_progress_and_builds_metrics():
     events = []
 
-    def cb(event_type, detail, progress):
-        events.append((event_type, detail, progress))
+    def cb(event_type, detail, progress, snapshot):
+        events.append((event_type, detail, progress, snapshot))
 
     probe_ops = {
         "duration_seconds_override": 2,
@@ -52,11 +52,19 @@ def test_execute_assessment_streamed_emits_progress_and_builds_metrics():
     assert "secondary_packet_loss_pct" in report["metrics"]
     assert "gateway_packet_loss_pct" in report["metrics"]
     assert any(event[0] == "phase_start" for event in events)
+    snapshots = [event[3] for event in events if event[0] == "phase_tick" and event[3] is not None]
+    assert snapshots
+    latest = snapshots[-1]
+    assert latest["verdict"] in {"PASS", "WARN", "FAIL"}
+    assert latest["sample_index"] >= 1
+    assert latest["sample_count"] >= 1
+    assert latest["latency_p95_ms"] == 30.0
+    assert latest["dns_p95_ms"] == 40.0
     assert events[-1][0] == "done"
 
 
 def test_tui_event_handler_refreshes_live_renderable():
-    state = {"phase": "Initializing", "progress": 0.0}
+    state = {"phase": "Initializing", "progress": 0.0, "snapshot": None, "frame_index": 0, "event_count": 0}
     logs = deque(maxlen=8)
     updates = []
 
@@ -71,9 +79,19 @@ def test_tui_event_handler_refreshes_live_renderable():
         clock=lambda: "12:00:00",
     )
 
-    handler("phase_start", "Scanning Wi-Fi link quality", 10.0)
+    sample_snapshot = {
+        "sample_index": 1,
+        "sample_count": 10,
+        "verdict": "PASS",
+        "latency_p95_ms": 20.0,
+    }
+
+    handler("phase_tick", "Scanning Wi-Fi link quality", 10.0, sample_snapshot)
 
     assert state["phase"] == "Scanning Wi-Fi link quality"
     assert state["progress"] == 10.0
-    assert list(logs) == ["[12:00:00] Scanning Wi-Fi link quality"]
+    assert state["snapshot"] == sample_snapshot
+    assert state["frame_index"] == 1
+    assert state["event_count"] == 1
+    assert list(logs) == []
     assert updates[-1]["phase"] == "Scanning Wi-Fi link quality"

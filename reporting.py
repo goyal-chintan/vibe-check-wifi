@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Any
 
+from doctor import get_friendly_name, get_impact_description, get_friendly_recommendation
+
 
 PROFILE_LABELS = {
     "audio": "Audio call",
@@ -11,26 +13,26 @@ PROFILE_LABELS = {
 
 
 METRIC_LABELS = {
-    "latency_p50_ms": "Latency p50 (ms)",
-    "latency_p95_ms": "Latency p95 (ms)",
-    "jitter_ms": "Jitter (ms)",
-    "packet_loss_pct": "Packet loss (%)",
-    "secondary_packet_loss_pct": "Secondary path packet loss (%)",
-    "secondary_latency_p95_ms": "Secondary path latency p95 (ms)",
-    "gateway_packet_loss_pct": "Gateway packet loss (%)",
-    "gateway_latency_p95_ms": "Gateway latency p95 (ms)",
-    "spike_count": "Latency spikes",
-    "dropout_count": "Dropouts",
-    "snr_db": "SNR (dB)",
-    "rssi_dbm": "RSSI (dBm)",
-    "noise_dbm": "Noise (dBm)",
-    "tx_rate_mbps": "Tx rate (Mbps)",
-    "dns_p95_ms": "DNS p95 (ms)",
-    "dns_failures": "DNS failures",
-    "route_timeout_hops": "Route timeout hops",
-    "congestion_delta_ms": "Latency under load delta (ms)",
-    "download_mbps": "Download throughput (Mbps)",
-    "upload_mbps": "Upload throughput (Mbps)",
+    "latency_p50_ms": "Typical Delay (ms)",
+    "latency_p95_ms": "Call Delay (ms)",
+    "jitter_ms": "Voice Stability (ms)",
+    "packet_loss_pct": "Dropped Audio/Video (%)",
+    "secondary_packet_loss_pct": "Backup Route Reliability (%)",
+    "secondary_latency_p95_ms": "Backup Route Delay (ms)",
+    "gateway_packet_loss_pct": "Router Connection Drops (%)",
+    "gateway_latency_p95_ms": "Router Response Time (ms)",
+    "spike_count": "Lag Spikes",
+    "dropout_count": "Total Dropouts",
+    "snr_db": "Signal Quality (dB)",
+    "rssi_dbm": "Signal Strength (dBm)",
+    "noise_dbm": "Background Interference (dBm)",
+    "tx_rate_mbps": "Wi-Fi Link Speed (Mbps)",
+    "dns_p95_ms": "App & Page Load Speed (ms)",
+    "dns_failures": "Failed Website Lookups",
+    "route_timeout_hops": "Network Path Health",
+    "congestion_delta_ms": "Slowdown Under Load (ms)",
+    "download_mbps": "Download Speed (Mbps)",
+    "upload_mbps": "Upload Speed (Mbps)",
 }
 
 
@@ -43,10 +45,11 @@ def _format_value(value: Any) -> str:
 
 
 def _issue_line(issue: dict[str, Any]) -> str:
-    return (
-        f"- [{issue['severity']}] {issue['metric']}: observed {issue['observed']} "
-        f"(target <= {issue['limit']})"
-    )
+    metric = issue.get("metric", "")
+    severity = issue.get("severity", "WARN")
+    friendly = get_friendly_name(metric)
+    impact = get_impact_description(metric, severity)
+    return f"- [{severity}] {friendly}: {impact}"
 
 
 def _format_use_case_results(use_case_results: dict[str, dict[str, Any]]) -> list[str]:
@@ -124,7 +127,11 @@ def format_report(report: dict[str, Any]) -> str:
     if issues:
         seen: set[str] = set()
         for issue in issues:
-            recommendation = issue.get("recommendation")
+            metric = issue.get("metric", "")
+            severity = issue.get("severity", "WARN")
+            # Use friendly recommendation first, fall back to original
+            friendly_rec = get_friendly_recommendation(metric, severity)
+            recommendation = friendly_rec or issue.get("recommendation", "")
             if recommendation and recommendation not in seen:
                 lines.append(f"- {recommendation}")
                 seen.add(recommendation)
