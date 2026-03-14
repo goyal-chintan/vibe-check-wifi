@@ -935,7 +935,9 @@ def execute_assessment_streamed(
     event_cb: EventCallback | None = None,
     probe_ops: dict[str, Any] | None = None,
 ) -> dict:
-    ops = probe_ops or _default_probe_ops()
+    ops = _default_probe_ops()
+    if probe_ops:
+        ops.update(probe_ops)
 
     def emit(event_type: str, detail: str, progress: float, snapshot: dict[str, Any] | None = None) -> None:
         if event_cb is not None:
