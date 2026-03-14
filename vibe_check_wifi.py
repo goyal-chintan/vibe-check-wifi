@@ -859,15 +859,18 @@ def _make_tui_event_handler(
         state["event_count"] = int(state.get("event_count", 0)) + 1
         if event_type == "phase_tick":
             state["frame_index"] = int(state.get("frame_index", 0)) + 1
-        # Track sparkline histories
+        # Track sparkline histories ONLY for new samples
         if snapshot:
-            for hist_key, snap_key in [("latency_history", "latency_p95_ms"), ("jitter_history", "jitter_ms"), ("loss_history", "packet_loss_pct")]:
-                val = snapshot.get(snap_key)
-                if val is not None:
-                    history = state.setdefault(hist_key, [])
-                    history.append(float(val))
-                    if len(history) > 60:
-                        del history[:len(history) - 60]
+            sample_index = snapshot.get("sample_index")
+            if sample_index != state.get("last_sparkline_sample"):
+                state["last_sparkline_sample"] = sample_index
+                for hist_key, snap_key in [("latency_history", "latency_p95_ms"), ("jitter_history", "jitter_ms"), ("loss_history", "packet_loss_pct")]:
+                    val = snapshot.get(snap_key)
+                    if val is not None:
+                        history = state.setdefault(hist_key, [])
+                        history.append(float(val))
+                        if len(history) > 60:
+                            del history[:len(history) - 60]
         verdict = snapshot.get("verdict") if snapshot else None
         if verdict == "PASS":
             state["clean_streak"] = int(state.get("clean_streak", 0)) + 1
@@ -1057,12 +1060,16 @@ def execute_assessment_streamed(
         )
 
         progress = ((idx + 1) / loop_count) * 90.0
-        emit("phase_tick", f"Monitoring interval {idx + 1}/{loop_count}", progress, last_snapshot)
 
         elapsed = time.time() - tick_start
         sleep_for = max(0.0, sample_interval_seconds - elapsed)
         if idx < loop_count - 1 and sleep_for > 0:
-            time.sleep(sleep_for)
+            end_sleep = time.time() + sleep_for
+            while time.time() < end_sleep:
+                emit("phase_tick", f"Monitoring interval {idx + 1}/{loop_count}", progress, last_snapshot)
+                time.sleep(min(0.06, end_sleep - time.time()))
+        else:
+            emit("phase_tick", f"Monitoring interval {idx + 1}/{loop_count}", progress, last_snapshot)
 
     emit("phase_done", "Monitoring all core signals over time", 90.0, last_snapshot)
 
@@ -1606,8 +1613,12 @@ def _run_live_monitor_tui(profile: str, theme: str) -> None:
                 live.update(render())
 
                 elapsed = time.time() - tick
-                sleep_time = max(0.1, interval - elapsed)
-                time.sleep(sleep_time)
+                sleep_time = max(0.01, interval - elapsed)
+                end_sleep = time.time() + sleep_time
+                while time.time() < end_sleep:
+                    state["frame_index"] = int(state.get("frame_index", 0)) + 1
+                    live.update(render())
+                    time.sleep(min(0.06, end_sleep - time.time()))
 
             logs.append(f"[{clock()}] [🏁 DONE] Live monitor complete")
             live.update(render())
