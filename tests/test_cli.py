@@ -1,4 +1,5 @@
 from pathlib import Path
+from unittest.mock import patch
 
 import vibe_check_wifi
 from vibe_check_wifi import load_settings, run_menu, save_settings
@@ -17,6 +18,22 @@ def test_run_menu_exit_directly():
     assert any("Exit" in line for line in lines)
     assert any("5) Choose Theme" in line for line in lines)
     assert any("9) Exit" in line for line in lines)
+
+
+@patch("vibe_check_wifi.run_check")
+def test_menu_quick_check_bypasses_prompts(mock_run_check):
+    inputs = iter(["1", "9"])
+    lines = []
+    run_menu(
+        input_fn=lambda _: next(inputs),
+        output_fn=lines.append,
+        handlers=None,
+    )
+    mock_run_check.assert_called_once()
+    args, kwargs = mock_run_check.call_args
+    assert args[0] in ["video", "audio", "video_share"] # profile
+    assert kwargs["minutes"] == 1
+    assert kwargs["include_speed_test"] is True
 
 
 def test_run_menu_retries_on_invalid_option():

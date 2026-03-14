@@ -1143,15 +1143,9 @@ def run_optional_speed_test(profile: str, output_fn=print) -> None:
 
 def run_live_monitor(profile: str, input_fn=input, output_fn=print) -> None:
     output_fn("")
-    output_fn("Live monitor mode")
-    interval = _prompt_int(input_fn, "Sampling interval in seconds [default 5]: ", default=5, minimum=2, maximum=30)
-    duration_minutes = _prompt_int(
-        input_fn,
-        "How many minutes to monitor [default 10]: ",
-        default=10,
-        minimum=1,
-        maximum=180,
-    )
+    output_fn("Live monitor mode (Press Ctrl+C to stop)")
+    interval = 2
+    duration_minutes = 180  # effectively indefinite
     target = DEFAULT_PRIMARY_TARGET
     gateway_ip = get_gateway_ip()
     sample_count = int((duration_minutes * 60) / interval)
@@ -1452,14 +1446,8 @@ def _run_live_monitor_tui(profile: str, theme: str) -> None:
         pass
     logs: deque[str] = deque(maxlen=12)
 
-    interval = _prompt_int(input, "Sampling interval in seconds [default 5]: ", default=5, minimum=2, maximum=30)
-    duration_minutes = _prompt_int(
-        input,
-        "How many minutes to monitor [default 10]: ",
-        default=10,
-        minimum=1,
-        maximum=180,
-    )
+    interval = 2
+    duration_minutes = 180  # effectively indefinite
 
     target = DEFAULT_PRIMARY_TARGET
     gateway_ip = get_gateway_ip()
@@ -1696,14 +1684,10 @@ def run_menu_tui() -> None:
             console.print("Exit selected. Bye.")
             return
         if choice == "1":
-            minutes = _prompt_int(input, "Quick check minutes [default 2]: ", default=2, minimum=1, maximum=5)
-            include_speed = _prompt_yes_no(input, "Include optional speed test? [y/N]: ", default=False)
-            _run_check_tui(selected_profile, selected_theme, minutes=minutes, include_speed_test=include_speed)
+            _run_check_tui(selected_profile, selected_theme, minutes=1, include_speed_test=True)
             continue
         if choice == "2":
-            minutes = _prompt_int(input, "Meeting check minutes [default 15]: ", default=15, minimum=10, maximum=60)
-            include_speed = _prompt_yes_no(input, "Include optional speed test? [y/N]: ", default=False)
-            _run_check_tui(selected_profile, selected_theme, minutes=minutes, include_speed_test=include_speed)
+            _run_check_tui(selected_profile, selected_theme, minutes=10, include_speed_test=True)
             continue
         if choice == "3":
             _run_live_monitor_tui(selected_profile, selected_theme)
@@ -1730,20 +1714,10 @@ def run_menu(input_fn=input, output_fn=print, handlers: dict[str, Callable[[], N
     selected_theme = load_settings().get("theme", DEFAULT_THEME)
 
     def quick_handler() -> None:
-        minutes = _prompt_int(input_fn, "Quick check minutes [default 2]: ", default=2, minimum=1, maximum=5)
-        include_speed = _prompt_yes_no(input_fn, "Include optional speed test? [y/N]: ", default=False)
-        run_check(selected_profile, minutes=minutes, include_speed_test=include_speed, output_fn=output_fn)
+        run_check(selected_profile, minutes=1, include_speed_test=True, output_fn=output_fn)
 
     def meeting_handler() -> None:
-        minutes = _prompt_int(
-            input_fn,
-            "Meeting check minutes [default 15]: ",
-            default=15,
-            minimum=10,
-            maximum=60,
-        )
-        include_speed = _prompt_yes_no(input_fn, "Include optional speed test? [y/N]: ", default=False)
-        run_check(selected_profile, minutes=minutes, include_speed_test=include_speed, output_fn=output_fn)
+        run_check(selected_profile, minutes=10, include_speed_test=True, output_fn=output_fn)
 
     def live_handler() -> None:
         run_live_monitor(selected_profile, input_fn=input_fn, output_fn=output_fn)
