@@ -1120,6 +1120,7 @@ def run_check(
     include_speed_test: bool,
     output_fn=print,
     event_cb: EventCallback | None = None,
+    probe_ops: dict[str, Any] | None = None,
 ) -> dict:
     output_fn("")
     output_fn(f"Running {minutes}-minute check for profile: {profile}")
@@ -1128,6 +1129,7 @@ def run_check(
         minutes=minutes,
         include_speed_test=include_speed_test,
         event_cb=event_cb,
+        probe_ops=probe_ops,
     )
     report = _build_report(profile, assessment, include_speed_test=include_speed_test)
     text = format_report(report)
@@ -1417,7 +1419,7 @@ def _run_check_tui(profile: str, theme: str, minutes: int, include_speed_test: b
 
     render = lambda: _render_tui_panel(theme, profile, state, logs)
 
-    with Live(render(), console=console, refresh_per_second=8, screen=True) as live:
+    with Live(render(), console=console, refresh_per_second=15, screen=True) as live:
         event_cb = _make_tui_event_handler(
             state=state,
             logs=logs,
@@ -1430,6 +1432,7 @@ def _run_check_tui(profile: str, theme: str, minutes: int, include_speed_test: b
             include_speed_test=include_speed_test,
             output_fn=lambda _: None,
             event_cb=event_cb,
+            probe_ops={"sample_interval_seconds": 2},
         )
 
     console.print(_render_result_summary_panel(theme, profile, report))
@@ -1474,7 +1477,7 @@ def _run_live_monitor_tui(profile: str, theme: str) -> None:
     logs.append(f"[{clock()}] [🚀 BOOT] Live Monitor started — {duration_minutes}min @ {interval}s")
 
     try:
-        with Live(render(), console=console, refresh_per_second=8, screen=True) as live:
+        with Live(render(), console=console, refresh_per_second=15, screen=True) as live:
             for index in range(sample_count):
                 tick = time.time()
 
