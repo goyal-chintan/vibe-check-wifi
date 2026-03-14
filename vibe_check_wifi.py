@@ -432,6 +432,27 @@ def _progress_bar_text(progress: float, width: int = 60) -> Text:
     return text
 
 
+def _sparkline(values: list[float], length: int = 15) -> str:
+    """Generate a sparkline string from a list of floats."""
+    if not values:
+        return " " * length
+    bars = " ▂▃▄▅▆▇█"
+    
+    recent = values[-length:] if len(values) > length else values
+    min_val, max_val = min(recent), max(recent)
+    
+    if min_val == max_val:
+        v = bars[3] * len(recent)
+        return v.ljust(length)
+        
+    res = ""
+    for v in recent:
+        idx = int((v - min_val) / (max_val - min_val) * 7)
+        idx = max(0, min(7, idx))
+        res += bars[idx]
+    return res.ljust(length)
+
+
 # ── Studio Board Theme ──────────────────────────────────────
 
 def _render_studio_board_panel(profile: str, state: dict[str, Any], logs: deque[str]) -> Any:
@@ -559,15 +580,26 @@ def _render_signal_radar_panel(profile: str, state: dict[str, Any], logs: deque[
     clock = _current_clock_str()
 
     # ── Radar sweep animation ──
-    sweep_chars = ["╱", "│", "╲", "─", "╱", "│", "╲", "─"]
-    s = sweep_chars[frame % len(sweep_chars)]
-    ring_frames = [
-        ["    ·    ", "  · · ·  ", " ·  ●  · ", "  · · ·  ", "    ·    "],
-        ["    ·    ", "  ·   ·  ", " ·  ●  · ", "  ·   ·  ", "    ·    "],
-        ["         ", "  · · ·  ", " ·  ●  · ", "  · · ·  ", "         "],
-        ["   · ·   ", "  ·   ·  ", "    ●    ", "  ·   ·  ", "   · ·   "],
-    ]
-    rings = ring_frames[frame % len(ring_frames)]
+    if verdict == "PASS" or not snapshot:
+        # Sweeping radar
+        s = ["╱", "│", "╲", "─"][(frame // 2) % 4]
+        rings = [
+            ["         ", "         ", f"    {s}    ", "         ", "         "],
+            ["         ", f"   {s} {s}   ", f"   {s}●{s}   ", f"   {s} {s}   ", "         "],
+            [f"  {s}   {s}  ", f" {s}     {s} ", f"{s}   ●   {s}", f" {s}     {s} ", f"  {s}   {s}  "],
+            ["         ", "         ", "    ●    ", "         ", "         "],
+        ][(frame // 3) % 4]
+    else:
+        # Pulsing target lock
+        pulse_frames = [
+            ["         ", "         ", "    ●    ", "         ", "         "],
+            ["         ", "   ( )   ", "  ( ● )  ", "   ( )   ", "         "],
+            ["         ", "  (( ))  ", " (( ● )) ", "  (( ))  ", "         "],
+            [" ((( ))) ", " ((( ))) ", "((( ● )))", " ((( ))) ", " ((( ))) "],
+            ["         ", "  (( ))  ", " (( ● )) ", "  (( ))  ", "         "],
+            ["         ", "   ( )   ", "  ( ● )  ", "   ( )   ", "         "],
+        ]
+        rings = pulse_frames[(frame // 2) % len(pulse_frames)]
 
     radar_art = Table.grid(expand=True)
     radar_art.add_column(justify="center")
@@ -603,9 +635,19 @@ def _render_signal_radar_panel(profile: str, state: dict[str, Any], logs: deque[
         val_str = _format_metric(val)
         style = _verdict_style(status)
         one_liner = get_radar_one_liner(key, status)
+        
+        # Add sparklines for latency and jitter
+        extra = ""
+        if key == "latency_p95_ms":
+            history = state.get("latency_history", [])
+            extra = f"  {_sparkline(history, 10)}"
+        elif key == "jitter_ms":
+            history = state.get("jitter_history", [])
+            extra = f"  {_sparkline(history, 10)}"
+
         board.add_row(
             Text(friendly_label, style="bold"),
-            Text(f"{val_str} {unit}", style=f"bold {style}"),
+            Text(f"{val_str} {unit}{extra}", style=f"bold {style}"),
             Text(_status_emoji(status)),
             Text(one_liner, style=f"italic {style}") if one_liner else Text(""),
         )
