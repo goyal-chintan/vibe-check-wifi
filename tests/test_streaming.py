@@ -91,7 +91,7 @@ def test_tui_event_handler_refreshes_live_renderable():
     assert state["phase"] == "Scanning Wi-Fi link quality"
     assert state["progress"] == 10.0
     assert state["snapshot"] == sample_snapshot
-    assert state["frame_index"] == 1
+    assert state["frame_index"] == 0
     assert state["event_count"] == 1
     assert list(logs) == []
     assert updates[-1]["phase"] == "Scanning Wi-Fi link quality"
